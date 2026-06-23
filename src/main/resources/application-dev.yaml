@@ -1,0 +1,24 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  # Local PostgreSQL Configuration
+  datasource:
+    url: jdbc:postgresql://192.168.18.185:5432/campanas_db
+    username: admin
+    password: BJBQj381
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update # Allow hibernate to update schema locally if needed, or stick to validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
