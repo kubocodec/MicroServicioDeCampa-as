@@ -121,12 +121,14 @@ jobs:
             docker rm -f ${CONTAINER_NAME} 2>/dev/null || true
 
             echo "==> Running new container"
+            # Sin publicar puerto de host: nginx (en kubocode_network) alcanza
+            # el servicio por nombre de contenedor -> campanas-service:8080.
+            # Asi evitamos colisiones de puerto en el host (ej. 8089 ya ocupado).
             docker run -d --name ${CONTAINER_NAME} \
               --restart=always \
               --network kubocode_network \
               --env-file .env \
               -e SERVER_PORT=8080 \
-              -p 8089:8080 \
               "$IMAGE"
 
             echo "==> Cleanup"
